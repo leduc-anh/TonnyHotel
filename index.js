@@ -7,16 +7,20 @@ import authRoutes from "./routes/authRoutes.js";
 import roomRoutes from "./routes/roomRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 dotenv.config()
 const app = express()
-app.use(cors())
+app.use(cors({
+    origin: `http://localhost:5173`,
+    credentials: true
+}));
 app.use(express.json())
 
 app.use("/api/auth", authRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/bookings", bookingRoutes);
-
+app.use('/api/user', userRoutes);
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
